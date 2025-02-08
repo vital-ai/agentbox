@@ -8,7 +8,7 @@ setup(
     description='Vital Agent Box',
     long_description=open('README.md').read(),
     long_description_content_type='text/markdown',
-    url='https://github.com/vital-ai/agentbox',
+    url='https://github.com/vital-ai/vital-agentbox',
     packages=find_packages(exclude=["test", "test_data"]),
     license='Apache License 2.0',
     install_requires=[

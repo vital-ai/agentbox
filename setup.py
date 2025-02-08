@@ -2,7 +2,7 @@ from setuptools import setup, find_packages
 
 setup(
     name='vital-agentbox',
-    version='0.0.1',
+    version='0.0.2',
     author='Marc Hadfield',
     author_email='marc@vital.ai',
     description='Vital Agent Box',
@@ -13,8 +13,13 @@ setup(
     license='Apache License 2.0',
     install_requires=[
 
-            'vital-ai-vitalsigns>=0.1.27',
-            'vital-ai-domain>=0.1.4',
+        'playwright',
+        'black',
+
+        'vital-ai-vitalsigns>=0.1.27',
+        'vital-ai-domain>=0.1.4',
+
+        'kgraphservice>=0.0.6',
     ],
     extras_require={
 

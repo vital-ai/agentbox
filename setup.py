@@ -13,8 +13,17 @@ setup(
     license='Apache License 2.0',
     install_requires=[
 
+        'pypandoc>=1.5',
+
         'playwright',
         'black',
+
+        # 'mistletoe',
+
+        'panflute>=2.3.1',
+
+        'matplotlib',
+        'numpy',
 
         'vital-ai-vitalsigns>=0.1.27',
         'vital-ai-domain>=0.1.4',

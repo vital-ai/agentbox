@@ -18,7 +18,9 @@ setup(
         'playwright',
         'black',
 
-        # 'mistletoe',
+        'lark',
+
+        'PyGithub>=2.5.0',
 
         'panflute>=2.3.1',
 

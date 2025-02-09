@@ -1,7 +1,7 @@
 import json
 import asyncio
 
-from agentbox.box.memfs import MemFS
+from agentbox.box.memfs.memfs import MemFS
 
 
 async def main():
@@ -43,6 +43,56 @@ async def main():
 
         removed_dir = await memfs.rmdir("/testdir")
         print("Removed /testdir:", removed_dir)
+
+        # Create directory "/testdir" and write a file inside it.
+        mkdir_result = await memfs.mkdir("/testdir")
+        print("Created /testdir:", mkdir_result)
+        write_result = await memfs.write_file("/testdir/hello.txt", "Hello, World!")
+        print("Wrote /testdir/hello.txt:", write_result)
+        listing = await memfs.list_dir("/testdir", recursive=False)
+        print("Listing of /testdir:", listing)
+
+        # Use the copy command to copy "/testdir" to "/copydir".
+        cp_result = await memfs.copy("/testdir", "/copydir")
+        print("Copy result:", cp_result)
+        copied_listing = await memfs.list_dir("/copydir", recursive=True)
+        print("Recursive listing of /copydir:", copied_listing)
+
+        # Clean up by removing the files and directories.
+        await memfs.remove_file("/testdir/hello.txt")
+        await memfs.rmdir("/testdir")
+        await memfs.remove_file("/copydir/hello.txt")
+        await memfs.rmdir("/copydir")
+
+        source_path = "/source.txt"
+        dest_path = "/dest.txt"
+        content = "This is a test file for copying."
+
+        # Write the source file.
+        write_ok = await memfs.write_file(source_path, content)
+        print("Write result:", write_ok, "\nContent:", content, "\nPath:", source_path)
+
+        copy_result = await memfs.copy(source_path, dest_path)
+        print("Copy result:", copy_result)
+
+        copied_content = await memfs.read_file(dest_path)
+        print("Copied content:", copied_content)
+
+        file_path = "/append.txt"
+        initial_content = "Hello"
+        appended_content = ", World!"
+
+        write_ok = await memfs.write_file(file_path, initial_content, append=False)
+        print("Write result:", write_ok)
+
+        append_ok = await memfs.write_file(file_path, appended_content, append=True)
+        print("Append result:", append_ok)
+
+        final_content = await memfs.read_file(file_path)
+        expected = initial_content + appended_content
+        print("Final content:", final_content, "\nExpected:", expected)
+
+        await memfs.remove_file(file_path)
 
         await browser.close()
 

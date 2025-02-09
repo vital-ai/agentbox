@@ -4,7 +4,7 @@ from playwright.async_api import async_playwright
 from black import format_str, FileMode
 
 from agentbox.box.box import Box
-from agentbox.box.memfs import MemFS
+from agentbox.box.memfs.memfs import MemFS
 
 
 class CodeExecutorBox(Box):
